@@ -35,12 +35,6 @@ cd smart-contracts
 npm install
 ```
 
-3. Configure as variáveis de ambiente:
-```bash
-cp .env.example .env
-# Edite o arquivo .env com suas configurações
-```
-
 ## 🛠️ Scripts Disponíveis
 
 ### Scripts Principais
