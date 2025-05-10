@@ -7,12 +7,11 @@ Este projeto implementa um sistema de registro de propriedades usando smart cont
 ```
 smart-contracts/
 ├── packages/
-│   ├── hardhat/           # Contratos e configuração do Hardhat
-│   │   ├── config/        # Configurações do Hyperledger Fabric
-│   │   ├── contracts/     # Contratos Solidity
-│   │   ├── scripts/       # Scripts de deploy e configuração
-│   │   └── test/          # Testes do contrato
-│   └── services/          # Serviços de integração (se necessário)
+│   └── hardhat/           # Contratos e configuração do Hardhat
+│       ├── config/        # Configurações do Hyperledger Fabric
+│       ├── contracts/     # Contratos Solidity
+│       ├── scripts/       # Scripts de deploy e configuração
+│       └── test/          # Testes do contrato
 ├── docs/                  # Documentação adicional
 └── scripts/              # Scripts de utilidade
 ```
@@ -22,7 +21,6 @@ smart-contracts/
 - Node.js (v14 ou superior)
 - Docker e Docker Compose
 - Hyperledger Fabric v2.2
-- Go (para compilar o chaincode)
 
 ## 🚀 Instalação
 
