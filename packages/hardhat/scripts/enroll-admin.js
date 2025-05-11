@@ -22,7 +22,7 @@ async function main() {
     }
 
     // Registra o admin
-    const caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
+    const caInfo = ccp.certificateAuthorities['ca.example.com'];
     const caTLSCACerts = caInfo.tlsCACerts.pem;
     const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 
@@ -42,7 +42,7 @@ async function main() {
     const userExists = await wallet.get('appUser');
     if (!userExists) {
       console.log('Registrando e inscrevendo o usuário da aplicação...');
-      const caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
+      const caInfo = ccp.certificateAuthorities['ca.example.com'];
       const caTLSCACerts = caInfo.tlsCACerts.pem;
       const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 

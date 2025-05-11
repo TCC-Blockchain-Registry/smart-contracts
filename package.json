@@ -1,22 +1,24 @@
 {
   "name": "smart-contracts",
   "version": "1.0.0",
-  "description": "Sistema de registro de propriedades usando smart contracts com Hyperledger Fabric",
+  "description": "Sistema de registro de propriedades usando Hyperledger Fabric e Solidity",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "clean": "npm run clean --workspaces",
-    "clean:all": "rm -rf node_modules && npm run clean:all --workspaces",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,sol}\"",
-    "lint": "npm run lint --workspaces",
-    "compile": "npm run compile --workspace=packages/hardhat",
-    "test": "npm run test --workspace=packages/hardhat",
-    "generate-artifacts": "npm run generate-artifacts --workspace=packages/hardhat",
+    "check-network": "npm run check-network --workspace=packages/hardhat",
     "start-network": "npm run start-network --workspace=packages/hardhat",
     "create-channel": "npm run create-channel --workspace=packages/hardhat",
-    "deploy-contract": "npm run deploy-contract --workspace=packages/hardhat"
+    "deploy-contract": "npm run deploy-contract --workspace=packages/hardhat",
+    "generate-artifacts": "npm run generate-artifacts --workspace=packages/hardhat",
+    "enroll-admin": "npm run enroll-admin --workspace=packages/hardhat",
+    "clean": "npm run clean --workspace=packages/hardhat",
+    "clean:all": "npm run clean:all --workspace=packages/hardhat",
+    "compile": "npm run compile --workspace=packages/hardhat",
+    "test": "npm run test --workspace=packages/hardhat",
+    "lint": "npm run lint --workspace=packages/hardhat",
+    "format": "npm run format --workspace=packages/hardhat"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

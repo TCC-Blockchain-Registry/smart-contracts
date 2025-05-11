@@ -8,7 +8,15 @@
     "test": "hardhat test",
     "deploy": "hardhat run scripts/deploy.js --network fabric",
     "lint": "solhint 'contracts/**/*.sol'",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check-network": "./scripts/check-network.sh",
+    "start-network": "./scripts/start-network.sh",
+    "create-channel": "./scripts/create-channel.sh",
+    "deploy-contract": "./scripts/deploy-contract.sh",
+    "generate-artifacts": "./scripts/generate-artifacts.sh",
+    "enroll-admin": "node scripts/enroll-admin.js",
+    "clean": "rm -rf crypto-config artifacts",
+    "clean:all": "rm -rf node_modules crypto-config artifacts"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.0",
