@@ -71,6 +71,8 @@ services:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/peer/msp
       - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/peer/tls
+      - ./../chaincode:/opt/gopath/src/github.com/chaincode
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 7051:7051
       - 7052:7052
@@ -104,6 +106,9 @@ services:
       - ./../chaincode:/opt/gopath/src/github.com/chaincode
       - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
       - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+      - ./crypto-config/ordererOrganizations/example.com/tlsca:/etc/hyperledger/fabric/tlsca
+      - ./channel-artifacts:/etc/hyperledger/configtx/channel-artifacts
+      - ./crypto-config/peerOrganizations/org1.example.com/tlsca:/etc/hyperledger/fabric/tlsca-org1
     depends_on:
       - orderer.example.com
       - peer0.org1.example.com

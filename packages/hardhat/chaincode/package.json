@@ -1,0 +1,12 @@
+{
+  "name": "property-registry-chaincode",
+  "version": "1.0.0",
+  "description": "Chaincode Node.js para registro de propriedades no Hyperledger Fabric.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "fabric-contract-api": "^2.2.0"
+  }
+} 

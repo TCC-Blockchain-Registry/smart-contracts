@@ -125,6 +125,9 @@ Application: &ApplicationDefaults
     Admins:
       Type: ImplicitMeta
       Rule: "MAJORITY Admins"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Writers"
   Capabilities:
     <<: *ApplicationCapabilities
 
@@ -250,3 +253,7 @@ sudo chown -R $USER:$USER "$CHANNEL_ARTIFACTS_DIR"
 
 echo -e "\n${GREEN}Artefatos gerados com sucesso!${NC}"
 echo -e "Artefatos gerados em: $CHANNEL_ARTIFACTS_DIR" 
+
+PropertyRegistry_1.0:cf65b3720672364f2b53a20e8e97b1bcd3673009b6120ba606db8d9758c84756
+
+peer lifecycle chaincode approveformyorg --channelID mychannel --name PropertyRegistry --version 1.0 --package-id PropertyRegistry_1.0:cf65b3720672364f2b53a20e8e97b1bcd3673009b6120ba606db8d9758c84756--sequence 1 --orderer orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem --ordererTLSHostnameOverride orderer.example.com

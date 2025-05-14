@@ -8,7 +8,7 @@ const userSchema = yup.object({
 });
 
 const loginSchema = yup.object({
-  username: yup.string().required(),
+  email: yup.string().email().required(),
   password: yup.string().required(),
 });
 
