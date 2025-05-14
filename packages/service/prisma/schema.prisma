@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -15,9 +14,48 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  email     String   @unique
+  id        String     @id @default(uuid())
+  username  String     @unique
+  email     String     @unique
   password  String
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  properties Property[] @relation("PropertyOwner")
+  transfersFrom Transfer[] @relation("TransferFrom")
+  transfersTo Transfer[] @relation("TransferTo")
+}
+
+model Property {
+  id                String     @id @default(uuid())
+  propertyId        String     @unique // Identificador único do imóvel
+  registrationNumber String    // Número de registro no cartório
+  ownerId           String     // ID do usuário proprietário
+  owner             User       @relation("PropertyOwner", fields: [ownerId], references: [id])
+  description       String     // Descrição do imóvel
+  propertyAddress   String     // Endereço físico do imóvel
+  area              Float      // Área em m²
+  propertyType      String     // Tipo do imóvel (CASA, APARTAMENTO, TERRENO, etc)
+  status            String     // Status do imóvel (REGULAR, PENDENTE, BLOQUEADO)
+  lastTransferDate  DateTime   // Data da última transferência
+  hasMortgage       Boolean    @default(false) // Indica se o imóvel tem hipoteca
+  mortgageDetails   String?    // Detalhes da hipoteca, se houver
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  transfers         Transfer[]
+}
+
+model Transfer {
+  id            String   @id @default(uuid())
+  propertyId    String
+  property      Property @relation(fields: [propertyId], references: [id])
+  fromId        String   // ID do usuário que transferiu
+  from          User     @relation("TransferFrom", fields: [fromId], references: [id])
+  toId          String   // ID do usuário que recebeu
+  to            User     @relation("TransferTo", fields: [toId], references: [id])
+  timestamp     DateTime @default(now())
+  reason        String   // Motivo da transferência
+  documentHash  String   // Hash do documento de transferência
+  notaryInfo    String   // Informações do cartório
+  transferValue Float    // Valor da transferência
+  paymentStatus String   // Status do pagamento
+  createdAt     DateTime @default(now())
 }

@@ -141,3 +141,6 @@ docker exec -e CORE_PEER_MSPCONFIGPATH=$CORE_PEER_MSPCONFIGPATH \
            --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 echo -e "\n${GREEN}Contrato instalado e instanciado com sucesso!${NC}" 
+
+
+peer lifecycle chaincode approveformyorg --channelID mychannel --name PropertyRegistry --version 1.0 --package-id PropertyRegistry_1.0:cf65b3720672364f2b53a20e8e971bcd3673009b6120ba606db8d9758c84756 --sequence 1 --orderer orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem --ordererTLSHostnameOverride orderer.example.com

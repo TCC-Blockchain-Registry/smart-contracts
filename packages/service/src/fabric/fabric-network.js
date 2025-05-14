@@ -2,8 +2,8 @@ const { Gateway, Wallets } = require('fabric-network');
 const path = require('path');
 const fs = require('fs');
 
-const connectionProfilePath = path.resolve(__dirname, '../modules/v1/properties/connection-profile.json');
-const walletPath = path.resolve(__dirname, '../modules/v1/properties/wallet');
+const connectionProfilePath = require.resolve('@hardhat/config/connection-profile.json');
+const walletPath = require('@hardhat/wallet');
 const channelName = 'mychannel';
 const chaincodeName = 'PropertyRegistry';
 
@@ -14,7 +14,7 @@ async function getContract(userId = 'appUser') {
   await gateway.connect(ccp, {
     wallet,
     identity: userId,
-    discovery: { enabled: true, asLocalhost: true }
+    discovery: { enabled: false, asLocalhost: true }
   });
   const network = await gateway.getNetwork(channelName);
   const contract = network.getContract(chaincodeName);

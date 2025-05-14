@@ -1,19 +1,24 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
-const propertyService = require('./property-service');
-const { validateProperty, validateTransfer, validateMortgage } = require('./property-validator');
+const propertyController = require('./controller');
+const authMiddleware = require(path.resolve(__dirname, '../../../middleware/auth'));
 
-// Registrar nova propriedade
-router.post('/', validateProperty, propertyService.registerProperty);
-// Listar todas as propriedades
-router.get('/', propertyService.getAllProperties);
-// Buscar propriedade específica
-router.get('/:propertyId', propertyService.getProperty);
-// Transferir propriedade
-router.post('/:propertyId/transfer', validateTransfer, propertyService.transferProperty);
-// Registrar hipoteca
-router.post('/:propertyId/mortgage', validateMortgage, propertyService.registerMortgage);
-// Remover hipoteca
-router.delete('/:propertyId/mortgage', propertyService.removeMortgage);
+// Rota pública (sem autenticação)
+router.get('/', propertyController.getAllProperties);
+
+// Rotas protegidas (exigem autenticação JWT)
+router.post('/', authMiddleware, propertyController.registerProperty);
+router.get('/:id', authMiddleware, propertyController.getProperty);
+router.post('/:id/transfer', authMiddleware, propertyController.transferProperty);
+router.get('/:id/transfers', authMiddleware, propertyController.getTransferHistory);
+router.put('/:id/status', authMiddleware, propertyController.setPropertyStatus);
+router.post('/:id/mortgage', authMiddleware, propertyController.addMortgage);
+router.delete('/:id/mortgage', authMiddleware, propertyController.removeMortgage);
+
+// Buscar propriedades de um usuário
+router.get('/user/:userId', authMiddleware, propertyController.getPropertiesByUser);
+// Buscar transferências de um usuário
+router.get('/user/:userId/transfers', authMiddleware, propertyController.getTransfersByUser);
 
 module.exports = router; 

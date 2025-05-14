@@ -1,6 +1,7 @@
 const { logger } = require('../../../utils/logger');
 const bcrypt = require('bcryptjs');
 const userRepository = require('../../../repository/user');
+const jwt = require('jsonwebtoken');
 
 const createUser = async (req, res) => {
   try {
@@ -44,12 +45,13 @@ const deleteUser = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await userRepository.findByUsername(username);
+    const { email, password } = req.body;
+    const user = await userRepository.findByEmail(email);
     if (!user) return res.status(401).json({ error: 'Usuário ou senha inválidos' });
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(401).json({ error: 'Usuário ou senha inválidos' });
-    res.json({ id: user.id, username: user.username, email: user.email });
+    const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ id: user.id, username: user.username, email: user.email, token });
   } catch (error) {
     logger.error(`Erro no login: ${error}`);
     res.status(500).json({ error: error.message });

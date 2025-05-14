@@ -6,6 +6,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "_moduleAliases": {
+    "@hardhat": "packages/hardhat",
+    "@api": "packages/service"
+  },
   "scripts": {
     "check-network": "npm run check-network --workspace=packages/hardhat",
     "start-network": "npm run start-network --workspace=packages/hardhat",
@@ -18,9 +22,14 @@
     "compile": "npm run compile --workspace=packages/hardhat",
     "test": "npm run test --workspace=packages/hardhat",
     "lint": "npm run lint --workspace=packages/hardhat",
-    "format": "npm run format --workspace=packages/hardhat"
+    "format": "npm run format --workspace=packages/hardhat",
+    "start": "npm run start --workspace=packages/service",
+    "dev": "npm run dev --workspace=packages/service"
   },
   "devDependencies": {
     "prettier": "^2.8.8"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.3"
   }
 }

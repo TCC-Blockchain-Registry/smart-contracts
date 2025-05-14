@@ -2,16 +2,15 @@ const express = require('express');
 const router = express.Router();
 const userService = require('./user-service');
 const { validateUser, validateLogin } = require('./user-validator');
+const authMiddleware = require('../../../middleware/auth');
 
-// Criar usuário
+// Rotas públicas
 router.post('/', validateUser, userService.createUser);
-// Buscar todos usuários
-router.get('/', userService.getAllUsers);
-// Buscar usuário por id
-router.get('/:userId', userService.getUserById);
-// Deletar usuário
-router.delete('/:userId', userService.deleteUser);
-// Login
 router.post('/login', validateLogin, userService.login);
+
+// Rotas protegidas (exigem autenticação JWT)
+router.get('/', authMiddleware, userService.getAllUsers);
+router.get('/:userId', authMiddleware, userService.getUserById);
+router.delete('/:userId', authMiddleware, userService.deleteUser);
 
 module.exports = router; 
